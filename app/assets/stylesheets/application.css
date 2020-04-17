@@ -12,4 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require app/app.css
+ *= require app/bootstrap.min.css
+ *= require app/bootstrap-extended.min.css
  */

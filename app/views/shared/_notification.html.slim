@@ -1,0 +1,14 @@
+- if notice
+  .alert.bg-success.alert-icon-left.alert-dismissible.fade.in.mb-2.alert-notification role="alert"
+    button.close aria-label="Close" data-dismiss="alert" type="button"
+      span aria-hidden="true"  ×
+    = notice
+- if alert
+  .alert.bg-warning.alert-icon-left.alert-dismissible.fade.in.mb-2.alert-notification role="alert"
+    button.close aria-label="Close" data-dismiss="alert" type="button"
+      span aria-hidden="true"  ×
+    = alert
+
+- content_for :script do
+  javascript:
+    $(".alert-notification").fadeTo(3200, 500).fadeOut("slow");

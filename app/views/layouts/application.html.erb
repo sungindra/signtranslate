@@ -13,7 +13,15 @@
   </head>
 
   <body>
-    <%= render partial: "shared/navbar_top" %>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <%= render partial: "shared/navbar_top" %>
+    <% end %>
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Description -->
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
