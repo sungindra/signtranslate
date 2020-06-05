@@ -1,7 +1,9 @@
 class Api::SignsController < Api::ApiController
   def index
-    signs = Sign.all
-    render json: signs, status: 200
+    # signs = Sign.all
+    # render json: signs, status: 200
+    categories = Category.all
+    render json: categories, status: :ok
   end
 
   def show

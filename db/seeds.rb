@@ -8,8 +8,8 @@
 
 User.create(email: "admin@example.com", password: "password")
 
-alphabet = Category.create(title: "Abjad", image: "alphabet.png")
-number = Category.create(title: "Angka", image: "number.png")
+alphabet = Category.create(title: "Abjad", image: "/alphabet.png")
+number = Category.create(title: "Angka", image: "/number.png")
 
 ("a".."z").each do |x| 
   Sign.create(meaning: x, sign_type: "sibi", image: "/signs/sibi_"+x+".png", category: alphabet)

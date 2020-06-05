@@ -9,5 +9,7 @@
 #  updated_at :datetime         not null
 #
 class Category < ApplicationRecord
+  validates_uniqueness_of :image
+
   has_many :signs
 end
