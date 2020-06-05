@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_093917) do
+ActiveRecord::Schema.define(version: 2020_06_05_123958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "signs", force: :cascade do |t|
     t.string "image"
@@ -21,6 +28,8 @@ ActiveRecord::Schema.define(version: 2020_05_16_093917) do
     t.integer "sign_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_signs_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,4 +44,5 @@ ActiveRecord::Schema.define(version: 2020_05_16_093917) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "signs", "categories"
 end
