@@ -1,0 +1,33 @@
+nav.header-navbar.navbar.navbar-with-menu.navbar-static-top.navbar-dark.bg-gradient-laundrian-blue.navbar-border.navbar-brand-center
+  .navbar-wrapper
+    .navbar-header
+      ul.nav.navbar-nav
+        li.nav-item.mobile-menu.hidden-md-up.float-xs-left
+          a.nav-link.nav-menu-main.menu-toggle.hidden-xs href="#"
+            i.ft-menu.font-large-1
+        li.nav-item
+          span.navbar-brand
+            h2.brand-text Sign&nbsp;Translate
+        li.nav-item.hidden-md-up.float-xs-right
+          a.nav-link.open-navbar-container data-target="#navbar-mobile" data-toggle="collapse"
+            i.fa.fa-ellipsis-v
+    .navbar-container.content.container-fluid
+      #navbar-mobile.collapse.navbar-toggleable-sm
+        ul.nav.navbar-nav.float-xs-right
+          li.dropdown.dropdown-user.nav-item
+            a.dropdown-toggle.nav-link.dropdown-user-link data-toggle="dropdown" href="#"
+              i
+              span.user-name
+                | Welcome, #{current_user.email.split("@").first}
+            .dropdown-menu.dropdown-menu-right
+              = link_to edit_user_registration_path, class: 'dropdown-item' do
+                i.ft-user
+                | Edit Profile
+              /- if %w[partner_owner].include? current_user.role
+                = link_to edit_admins_partner_path(current_user.partner), class: 'dropdown-item' do
+                  i.ft-users
+                  | Edit Partner
+              .dropdown-divider
+              = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+                i.ft-power
+                | Logout

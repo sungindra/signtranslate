@@ -1,0 +1,12 @@
+.header-navbar.navbar.navbar-horizontal.navbar-fixed.navbar-light.navbar-without-dd-arrow.navbar-shadow.menu-border data-menu="menu-wrapper" role="navigation"
+  .navbar-container.main-menu-content data-menu="menu-container"
+    / ul#main-menu-navigation.nav.navbar-nav data-menu="menu-navigation"
+    /   li.nav-item
+    /     = link_to root_path, class: 'nav-link' do
+    /       i.fa.fa-home
+    /       span Dashboard
+    ul#parter-menu-navigation.nav.navbar-nav data-menu="menu-navigation"
+      li.nav-item
+        = link_to signs_path, class: 'nav-link' do
+          i.fa.fa-hand-paper-o
+          span Signs

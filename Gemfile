@@ -63,4 +63,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
 gem 'devise'
-gem "active_model_serializers"
+gem 'active_model_serializers'
+gem 'pagy', '~> 3.7.2'
+gem 'ransack'
+gem 'font-awesome-rails'
