@@ -1915,9 +1915,7 @@ fieldset[disabled] a.btn {
   .btn-danger.disabled:hover, .btn-danger:disabled:hover {
     background-color: #FF7588;
     border-color: #FF7588; }
-.gold {
-  color: #FFD700;
-}
+
 .btn-outline-primary {
   color: #00B5B8;
   background-image: none;
@@ -2180,7 +2178,7 @@ tbody.collapse.in {
   height: 0;
   margin-left: 0.3em;
   vertical-align: middle;
-  content: "";
+  /* content: ""; */
   border-top: 0.3em solid;
   border-right: 0.3em solid transparent;
   border-left: 0.3em solid transparent; }
@@ -3164,7 +3162,7 @@ tbody.collapse.in {
     display: table;
     clear: both; }
 
-.card-title blue{
+.card-title {
   margin-bottom: 1.5rem; }
 
 .card-subtitle {

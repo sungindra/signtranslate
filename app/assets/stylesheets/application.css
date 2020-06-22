@@ -12,8 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require app/feather-style.css
+ *= require font-awesome
  *= require app/app.css
  *= require app/bootstrap.css
- *= require app/bootstrap-extended.min.css
- *= require font-awesome
+ *= require app/bootstrap-extended.css
+ *= require app/horizontal-menu.css
  */

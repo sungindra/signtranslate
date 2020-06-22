@@ -17,7 +17,7 @@
                 .col-sm-9
                   .input-group
                     span.input-group-addon
-                      i.fa-search.bg-secondary aria-hidden="true"
+                      i.fa.fa-search.bg-secondary aria-hidden="true"
                     = f.text_field :meaning_cont, :placeholder => "Cari dari judul sign", class: "form-control"
                 .col-sm-2
                   = f.select :sign_type_eq, options_for_select([["SIBI & BISINDO", ""], ["SIBI", 0], ["BISINDO", 1]], selected: (params[:q][:sign_type_eq] if params[:q].present?)),{}, { :class => "form-control" }
@@ -36,15 +36,15 @@
                 tbody
                   - @signs.each do |sign|
                     tr
-                      td = sign.sign_type
-                      td = link_to sign.meaning, sign_path(sign), target: :_blank
-                      td = image_tag(sign.image)
-                      td = I18n.l(sign.created_at)
+                      td = sign.sign_type.upcase
+                      td class="font-weight-bold" = sign.meaning.capitalize
+                      td = image_tag(sign.image, size: "100")
+                      td = sign.created_at.strftime("%d/%m/%Y")
                       td
-                        .button-group
-                          = link_to edit_sign_path(sign), class: "btn-sm btn-warning" do
+                        .btn-group role="group"
+                          = link_to edit_sign_path(sign), class: "btn btn-warning" do
                             i.fa.fa-eye
-                          = link_to sign_path(sign), method: :delete, data: {confirm: "Anda yakin ingin menghapus #{sign.meaning} - #{sign.sign_type}?"}, class: "btn-sm btn-danger" do
+                          = link_to sign_path(sign), method: :delete, data: {confirm: "Anda yakin ingin menghapus #{sign.meaning} - #{sign.sign_type}?"}, class: "btn btn-danger" do
                             i.fa.fa-trash-o
 
               = pagy_bootstrap_nav(@pagy).html_safe

@@ -12,5 +12,9 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require jquery
+//= require app/vendors.min.js
+//= require app/app-menu.js
+//= require app/app.js
 //= require turbolinks
 //= require_tree .
