@@ -5,10 +5,10 @@
       .col-md-12
         .card
           .card-header
-            h4.card-title List sign ( #{@pagy.count} )
+            h4.card-title Kosa Kata Kamus ( #{@pagy.count} )
             .heading-elements
               .pull-center
-                = link_to "Tambahkan sign", new_sign_path,remote: true, class: "btn btn-primary"
+                = link_to "Tambahkan isyarat", new_sign_path, class: "btn btn-primary"
             a.heading-elements-toggle
               i.fa.fa-ellipsis-v.font-medium-3
           .row
@@ -25,26 +25,27 @@
                   = f.submit "Cari", class: "btn btn-primary"
           .card-body.collapse.in
             .card-block.card-dashboard
-              table.table.table-striped.table-bordered
-                thead
-                  tr
-                    th width="20%" class="center" = sort_link(@q, :sign_type, "Bahasa")
-                    th width="20%" class="center" = sort_link(@q, :meaning, "Arti")
-                    th width="1%" Gambar
-                    th width="20%" class="center" = sort_link(@q, :created_at, "Tanggal Dibuat")
-                    th Aksi
-                tbody
-                  - @signs.each do |sign|
+              .table-responsive
+                table.table.table-striped.table-bordered
+                  thead
                     tr
-                      td = sign.sign_type.upcase
-                      td class="font-weight-bold" = sign.meaning.capitalize
-                      td = image_tag(sign.image, size: "100")
-                      td = sign.created_at.strftime("%d/%m/%Y")
-                      td
-                        .btn-group role="group"
-                          = link_to edit_sign_path(sign), class: "btn btn-warning" do
-                            i.fa.fa-eye
-                          = link_to sign_path(sign), method: :delete, data: {confirm: "Anda yakin ingin menghapus #{sign.meaning} - #{sign.sign_type}?"}, class: "btn btn-danger" do
-                            i.fa.fa-trash-o
+                      th width="20%" class="center" = sort_link(@q, :sign_type, "Bahasa")
+                      th width="20%" class="center" = sort_link(@q, :meaning, "Arti")
+                      th width="20%" Gambar
+                      th width="15%" class="center" = sort_link(@q, :created_at, "Tanggal Dibuat")
+                      th width="10%" Aksi
+                  tbody
+                    - @signs.each do |sign|
+                      tr
+                        td = sign.sign_type.upcase
+                        td class="font-weight-bold" = sign.meaning.capitalize
+                        td = image_tag(sign.image.url, size: "120")
+                        td = sign.created_at.strftime("%d/%m/%Y")
+                        td
+                          .btn-group role="group"
+                            = link_to edit_sign_path(sign), class: "btn btn-success" do
+                              i.fa.fa-cog
+                            = link_to sign_path(sign), method: :delete, data: {confirm: "Anda yakin ingin menghapus #{sign.meaning} - #{sign.sign_type}?"}, class: "btn btn-danger" do
+                              i.fa.fa-trash-o
 
               = pagy_bootstrap_nav(@pagy).html_safe

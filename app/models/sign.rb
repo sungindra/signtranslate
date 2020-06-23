@@ -33,4 +33,6 @@ class Sign < ApplicationRecord
   belongs_to :category
   belongs_to :user
   belongs_to :post, optional: true
+
+  mount_uploader :image, ImageUploader
 end
