@@ -26,4 +26,22 @@ class User < ApplicationRecord
   has_many :posts
   has_many :signs
   has_many :comments
+
+  # def clear_push_notification!
+  #   update(push_token: nil)
+  # end
+
+  def generate_jwt
+    JWT.encode({
+      id: id,
+      exp: 5.years.from_now.to_i,
+      iat: Time.zone.now.to_i
+      }, "secret") #temporary
+  end
+
+  def self.authenticate(email, password)
+    user = User.find_by(email: email)
+    return nil unless user.present?
+    user if user.valid_password?(password)
+  end
 end

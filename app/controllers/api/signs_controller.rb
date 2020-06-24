@@ -1,4 +1,7 @@
 class Api::SignsController < Api::ApiController
+  skip_before_action :authenticate_user
+  skip_before_action :authenticate_with_token!
+
   def index
     # signs = Sign.all
     # render json: signs, status: 200
