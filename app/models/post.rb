@@ -21,5 +21,5 @@
 #
 class Post < ApplicationRecord
   belongs_to :user
-  has_one :sign
+  has_one :sign, dependent: :nullify
 end

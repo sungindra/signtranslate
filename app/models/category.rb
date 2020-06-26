@@ -11,5 +11,5 @@
 class Category < ApplicationRecord
   validates_uniqueness_of :image
 
-  has_many :signs
+  has_many :signs, dependent: :destroy
 end

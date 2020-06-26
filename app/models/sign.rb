@@ -26,8 +26,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Sign < ApplicationRecord
-  validates_uniqueness_of :image
-
   enum sign_type: { sibi: 0 , bisindo: 1 }
 
   belongs_to :category

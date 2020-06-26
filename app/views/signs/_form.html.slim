@@ -1,0 +1,40 @@
+.card
+  .card-header
+    = simple_form_for @sign, url: url do |f|
+      .form-inputs
+        =f.input :meaning, label: 'Arti'
+        =f.input :image, label: 'Gambar Isyarat'
+        = image_tag "#{@sign.image.file.present? ? @sign.image.url : ''}", class: "#{@sign.image.file.present? ? '' : 'hidden'} image_to_upload img-thumbnail"
+        =f.input :sign_type, collection: [["SIBI", "sibi"], ["BISINDO", "bisindo"]], label:'Nama Kota', include_blank: "Pilih bahasa"
+      .form-actions
+        = f.button :submit, class: "btn btn-primary btn-block"
+
+
+- content_for :script do
+  javascript:
+    (function () {
+      var ready_post;
+      ready_post = function () {
+        var readURL;
+        $('#sign_image').on('change', function (e) {
+          return readURL(this);
+        });
+        return readURL = function (input) {
+          var reader;
+          if (input.files && input.files[0]) {
+            reader = new FileReader();
+          }
+          reader.onload = function (e) {
+            var $swap;
+            $('.image_to_upload').attr('src', e.target.result).removeClass('hidden');
+            $swap = $('.swap');
+            if ($swap) {
+              return $swap.removeClass('hidden');
+            }
+          };
+          return reader.readAsDataURL(input.files[0]);
+        };
+      };
+      $(document).ready(ready_post);
+      $(document).on('turbolinks:load', ready_post);
+    }).call(this);
