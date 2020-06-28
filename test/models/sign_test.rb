@@ -7,6 +7,7 @@
 #  image       :string
 #  meaning     :string
 #  sign_type   :integer
+#  status      :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint
