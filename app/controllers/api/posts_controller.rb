@@ -1,11 +1,29 @@
-class Api::PostsController < Api::ApiControllers
+class Api::PostsController < Api::ApiController
   def index
     posts = Post.all
-    render json: signs, status: 200
+    render json: posts, status: 200
   end
 
   def show
-    sign = Sign.find(params[:id])
-    render json: sign, serializer: SignDetailSerializer, status: 200
+    post = Post.find(params[:id])
+    render json: post, serializer: PostDetailSerializer, status: 200
+  end
+
+  def create
+    post = Post.new(post_params)
+    if post.save
+      render json: post, status: :created
+    else
+      render json: { errors: post.errors.full_messages.to_sentence }, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def post_params
+    params.require(:post).permit(
+      :title,
+      :content
+      # :type
+    ).merge(status: "unapproved", user_id: current_user.id)
   end
 end

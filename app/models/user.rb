@@ -25,7 +25,6 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :signs, dependent: :nullify
-  has_many :comments, dependent: :nullify
   has_many :votes, dependent: :destroy
 
   # def clear_push_notification!

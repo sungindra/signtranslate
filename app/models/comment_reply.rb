@@ -6,20 +6,20 @@
 #  comment    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  comment_id :bigint
+#  sign_id    :bigint
 #  user_id    :bigint
 #
 # Indexes
 #
-#  index_comment_replies_on_comment_id  (comment_id)
-#  index_comment_replies_on_user_id     (user_id)
+#  index_comment_replies_on_sign_id  (sign_id)
+#  index_comment_replies_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (comment_id => comments.id)
+#  fk_rails_...  (sign_id => signs.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class CommentReply < ApplicationRecord
   belongs_to :user
-  belongs_to :comment
+  belongs_to :sign
 end

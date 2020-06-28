@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_144110) do
+ActiveRecord::Schema.define(version: 2020_06_28_110933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,21 +25,11 @@ ActiveRecord::Schema.define(version: 2020_06_26_144110) do
   create_table "comment_replies", force: :cascade do |t|
     t.string "comment"
     t.bigint "user_id"
-    t.bigint "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_comment_replies_on_comment_id"
+    t.bigint "sign_id"
+    t.index ["sign_id"], name: "index_comment_replies_on_sign_id"
     t.index ["user_id"], name: "index_comment_replies_on_user_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "comment"
-    t.bigint "user_id"
-    t.bigint "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -91,10 +81,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_144110) do
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
   end
 
-  add_foreign_key "comment_replies", "comments"
+  add_foreign_key "comment_replies", "signs"
   add_foreign_key "comment_replies", "users"
-  add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "signs", "categories"
   add_foreign_key "signs", "posts"

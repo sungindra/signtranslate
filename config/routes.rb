@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :signs
 
   namespace :api, defaults: { format: :json } do
-    resources :signs, only: %i[show index]
+    resources :signs, only: %i[create show index]
     resources :categories, only: %i[show index]
-    resources :post
+    resources :posts
 
     resources :sessions, only: %i[create destroy]
     resources :users, only: [:create]

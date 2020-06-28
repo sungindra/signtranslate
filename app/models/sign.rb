@@ -61,5 +61,7 @@ class Sign < ApplicationRecord
   belongs_to :user
   belongs_to :post, optional: true
 
+  has_many :comment_replies
+
   mount_uploader :image, ImageUploader
 end

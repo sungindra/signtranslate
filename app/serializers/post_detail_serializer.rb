@@ -19,10 +19,8 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Post < ApplicationRecord
-  belongs_to :user
-  has_many :signs, dependent: :nullify
 
-  enum status: {unapproved: 0, approved: 1}
-  # enum type: { sibi: 0 , bisindo: 1 }
+class PostDetailSerializer < ActiveModel::Serializer
+  attributes :id, :title, :content, :status
+  has_many :signs, serializer: SignSerializer
 end

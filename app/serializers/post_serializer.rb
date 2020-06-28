@@ -1,27 +1,25 @@
 # == Schema Information
 #
-# Table name: comment_replies
+# Table name: posts
 #
 #  id         :bigint           not null, primary key
-#  comment    :string
+#  content    :string
+#  status     :integer
+#  title      :string
+#  type       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  sign_id    :bigint
 #  user_id    :bigint
 #
 # Indexes
 #
-#  index_comment_replies_on_sign_id  (sign_id)
-#  index_comment_replies_on_user_id  (user_id)
+#  index_posts_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sign_id => signs.id)
 #  fk_rails_...  (user_id => users.id)
 #
 
-one:
-  comment: MyString
-
-two:
-  comment: MyString
+class PostSerializer < ActiveModel::Serializer
+  attributes :id, :title, :status
+end
