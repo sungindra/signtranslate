@@ -14,6 +14,7 @@ class SignsController < ApplicationController
   def create
     @sign = Sign.new(sign_params)
     if @sign.save
+      @sign.admin_submitted! if @sign.may_admin_submitted?
       redirect_to signs_path, notice: 'Kosa kata berhasil ditambahkan'
     else
       render 'new'
@@ -35,7 +36,7 @@ class SignsController < ApplicationController
 
   private
   def sign_params
-    params.require(:sign).permit(:meaning, :image, :sign_type)
+    params.require(:sign).permit(:meaning, :image, :sign_type, :description)
   end
 
   def set_sign
