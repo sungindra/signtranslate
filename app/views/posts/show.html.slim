@@ -1,0 +1,28 @@
+.card
+  .card-header
+    h1 = @post.title
+    | by :&nbsp;
+    = @post.user.name
+    | &nbsp;
+    span.font-italic.text-muted = @post.user.email
+  .card-body
+    .card-block.card-dashboard
+      p = @post.content
+
+- if @answers.none?
+  .card.bg-comment
+    .card-body.card-block
+      | Belum ada comment
+- else
+  - @answers.each do |answer|
+    .card.bg-comment
+      .card-header
+        p.card-title = answer.meaning
+        .heading-elements
+          .pull-center
+            = link_to "<i class='ft-check'></i> Terima".html_safe, approve_post_path(answer), class: "btn btn-success"
+      .card-body.card-block
+        = image_tag answer.image.url
+        br
+        = answer.description
+

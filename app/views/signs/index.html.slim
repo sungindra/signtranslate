@@ -9,8 +9,6 @@
             .heading-elements
               .pull-center
                 = link_to "Tambahkan kosa kata", new_sign_path, class: "btn btn-primary"
-            a.heading-elements-toggle
-              i.fa.fa-ellipsis-v.font-medium-3
           .row
             .card-block.card-dashboard
               = search_form_for @q do |f|
@@ -18,7 +16,7 @@
                   .input-group
                     span.input-group-addon
                       i.fa.fa-search.bg-secondary aria-hidden="true"
-                    = f.text_field :meaning_cont, :placeholder => "Cari dari judul sign", class: "form-control"
+                    = f.text_field :meaning_cont, :placeholder => "Cari dari arti kata", class: "form-control"
                 .col-sm-2
                   = f.select :sign_type_eq, options_for_select([["SIBI & BISINDO", ""], ["SIBI", 0], ["BISINDO", 1]], selected: (params[:q][:sign_type_eq] if params[:q].present?)),{}, { :class => "form-control" }
                 .col-sm-1
@@ -29,16 +27,16 @@
                 table.table.table-striped.table-bordered
                   thead
                     tr
-                      th width="20%" class="center" = sort_link(@q, :sign_type, "Bahasa")
-                      th width="20%" class="center" = sort_link(@q, :meaning, "Arti")
-                      th width="20%" Gambar
-                      th width="15%" class="center" = sort_link(@q, :created_at, "Tanggal Dibuat")
-                      th width="10%" Aksi
+                      th.center width="20%" = sort_link(@q, :sign_type, "Bahasa")
+                      th.center width="20%" = sort_link(@q, :meaning, "Arti")
+                      th.center width="20%" Gambar
+                      th.center width="15%" = sort_link(@q, :created_at, "Tanggal Dibuat")
+                      th.center width="10%" Aksi
                   tbody
                     - @signs.each do |sign|
                       tr
                         td = sign.sign_type.upcase
-                        td class="font-weight-bold" = sign.meaning.capitalize
+                        td.font-weight-bold = sign.meaning.capitalize
                         td = image_tag(sign.image.url, size: "120")
                         td = sign.created_at.strftime("%d/%m/%Y")
                         td
