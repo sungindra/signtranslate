@@ -14,6 +14,7 @@ class SignsController < ApplicationController
   def create
     @sign = Sign.new(sign_params)
     if @sign.save
+      @sign.update(user_id: current_user.id)
       @sign.admin_submitted! if @sign.may_admin_submitted?
       redirect_to signs_path, notice: 'Kosa kata berhasil ditambahkan'
     else
@@ -25,7 +26,7 @@ class SignsController < ApplicationController
     if @sign.update(sign_params)
       redirect_to signs_path, notice: 'Kosa kata berhasil diperbaharui'
     else
-      render 'new'
+      render 'edit'
     end
   end
 

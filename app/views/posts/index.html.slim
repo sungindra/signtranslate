@@ -5,7 +5,7 @@
       .col-md-12
         .card
           .card-header
-            h4.card-title Forum ( #{params[:status].titleize} )
+            h4.card-title Forum ( #{@type} )
             .heading-elements
               .pull-center
                 = link_to "Buat <span class=\"font-italic\">Thread</span> Baru".html_safe, new_post_path, class: "btn btn-primary"
@@ -17,6 +17,8 @@
                     span.input-group-addon
                       i.fa.fa-search.bg-secondary aria-hidden="true"
                     = f.text_field :title_or_content_cont, :placeholder => "Cari dari judul atau konten forum", class: "form-control"
+                    - if params[:status]
+                      input type="text" value="#{params[:status]}" name="status" hidden="true"
                 .col-sm-1
                   = f.submit "Cari", class: "btn btn-primary"
           .card-body.collapse.in

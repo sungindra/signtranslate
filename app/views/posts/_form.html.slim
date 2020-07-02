@@ -1,0 +1,7 @@
+.card
+  .card-header
+    = simple_form_for @post, url: url do |f|
+      .form-inputs
+        =f.input :title, label: 'Judul'
+        =f.input :content, label: 'Konten'
+        = f.button :submit, class: "btn btn-primary btn-block"
