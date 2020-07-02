@@ -31,7 +31,8 @@ class Api::CommentsController < Api::ApiController
                                  :description,
                                  :category_id)
                          .merge(user_id: current_user.id,
-                                post_id: params[:post_id])
+                                post_id: params[:post_id],
+                                status: "new")
   end
 
   def reply_params
