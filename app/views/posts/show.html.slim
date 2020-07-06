@@ -10,12 +10,12 @@
       p = @post.content
 
 - if @answers.none?
-  .card.bg-comment
+  .card
     .card-body.card-block
       | Belum ada comment
 - else
   - @answers.each do |answer|
-    .card.bg-comment
+    .card
       .card-header
         p.card-title = answer.meaning
         .heading-elements
@@ -25,4 +25,15 @@
         = image_tag answer.image.url
         br
         = answer.description
+      ul.list-group.list-group-flush
+        - answer.comment_replies.each do |reply|
+          li.list-group-item.bg-comment
+            b = reply.user.name
+            | &nbsp
+            span.font-italic.text-muted = reply.user.email
+            p = reply.comment
 
+css:
+  .bg-comment{
+    background-color: #f1f3f5!important;
+  }

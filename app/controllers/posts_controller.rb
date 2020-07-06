@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @answers = Sign.where(post: @post)
+    @answers = Sign.where(post: @post).includes(:comment_replies)
   end
 
   def new
@@ -17,17 +17,17 @@ class PostsController < ApplicationController
   end
 
   def create
-    if @post.create(post_params)
+    if Post.create(post_params)
       redirect_to posts_path, notice: 'Forum berhasil diperbaharui'
     else
-      render 'edit'
+      render 'new'
     end
   end
 
   def edit; end
 
   def update
-    if @post.update(post_params)
+    if @post.update(post_edit_params)
       redirect_to posts_path, notice: 'Forum berhasil diperbaharui'
     else
       render 'edit'
@@ -43,5 +43,13 @@ class PostsController < ApplicationController
   private
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content).merge(status: "unapproved", user_id: current_user.id)
+  end
+
+  def post_edit_params
+    params.require(:post).permit(:title, :content)
   end
 end
