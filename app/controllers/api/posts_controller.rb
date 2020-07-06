@@ -18,6 +18,60 @@ class Api::PostsController < Api::ApiController
     end
   end
 
+  def upvote
+    post = Post.find(params[:id])
+    vote = post.votes.find_by(user_id: current_user.id)
+    if vote
+      success = false
+      if vote.up
+        #if upvoted, delete vote
+        success = vote.destroy
+      else
+        #if downvoted, change to upvote
+        success = vote.update(up: true)
+      end
+      if success
+        render json: post, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    else
+      vote = Vote.new(up: true, voteable_id: post.id, voteable_type: post.class.name, user_id: current_user.id)
+      if vote.save
+        render json: post, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def downvote
+    post = Post.find(params[:id])
+    vote = post.votes.find_by(user_id: current_user.id)
+    if vote
+      success = false
+      unless vote.up
+        #if upvoted, delete vote
+        success = vote.destroy
+      else
+        #if downvoted, change to upvote
+        success = vote.update(up: false)
+      end
+      if success
+        render json: post, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    else
+      vote = Vote.new(up: false, voteable_id: post.id, voteable_type: post.class.name, user_id: current_user.id)
+      if vote.save
+        render json: post, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    end
+  end
+
   private
   def post_params
     params.require(:post).permit(

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_110933) do
+ActiveRecord::Schema.define(version: 2020_07_06_192051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2020_06_28_110933) do
     t.bigint "voteable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
   end
 
@@ -87,4 +89,5 @@ ActiveRecord::Schema.define(version: 2020_06_28_110933) do
   add_foreign_key "signs", "categories"
   add_foreign_key "signs", "posts"
   add_foreign_key "signs", "users"
+  add_foreign_key "votes", "users"
 end

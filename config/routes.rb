@@ -12,11 +12,17 @@ Rails.application.routes.draw do
     resources :signs, only: %i[show index]
     resources :categories, only: %i[show index]
     resources :posts, except: [:destroy] do
-      resources :comments, only: %i[create], on: :member do
-        member do
-          get :replies
-          post :reply
+      member do
+        resources :comments, only: %i[create] do
+          member do
+            get :replies
+            post :reply
+            post :upvote
+            post :downvote
+          end
         end
+        post :upvote
+        post :downvote
       end
     end
 

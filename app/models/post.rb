@@ -22,6 +22,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :signs, dependent: :nullify
+  has_many :votes, as: :voteable
 
   enum status: {unapproved: 0, approved: 1}
   # enum type: { sibi: 0 , bisindo: 1 }
