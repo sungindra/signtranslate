@@ -29,6 +29,10 @@
 class SignDetailSerializer < ActiveModel::Serializer
   attributes :id, :meaning, :sign_type, :image, :description, :user_id, :user_name
 
+  def image
+    object.image.url
+  end
+
   def user_name
     object.user.name
   end
