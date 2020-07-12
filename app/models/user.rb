@@ -9,6 +9,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :integer          default("member")
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -22,6 +23,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  enum role: {member: 1, admin: 10}
 
   has_many :posts, dependent: :destroy
   has_many :signs, dependent: :nullify
