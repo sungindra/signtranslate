@@ -21,6 +21,15 @@
 #
 
 class PostDetailSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :status
+  attributes :id, :title, :content, :status, :total_votes
   has_many :signs, serializer: SignSerializer
+  has_one :user_vote, serializer: VoteSerializer
+
+  def total_votes
+    object.votes.total_votes
+  end
+
+  def user_vote
+    object.votes.where(user: scope.current_user).first
+  end
 end

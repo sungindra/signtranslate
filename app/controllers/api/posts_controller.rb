@@ -23,12 +23,12 @@ class Api::PostsController < Api::ApiController
     vote = post.votes.find_by(user_id: current_user.id)
     if vote
       success = false
-      if vote.up
+      if vote.up?
         #if upvoted, delete vote
         success = vote.destroy
       else
         #if downvoted, change to upvote
-        success = vote.update(up: true)
+        success = vote.update(vote: "up")
       end
       if success
         render json: post, status: 200
@@ -36,7 +36,7 @@ class Api::PostsController < Api::ApiController
         render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
     else
-      vote = Vote.new(up: true, voteable_id: post.id, voteable_type: post.class.name, user_id: current_user.id)
+      vote = Vote.new(vote: "up", voteable_id: post.id, voteable_type: post.class.name, user_id: current_user.id)
       if vote.save
         render json: post, status: 200
       else
@@ -50,12 +50,12 @@ class Api::PostsController < Api::ApiController
     vote = post.votes.find_by(user_id: current_user.id)
     if vote
       success = false
-      unless vote.up
+      unless vote.up?
         #if upvoted, delete vote
         success = vote.destroy
       else
         #if downvoted, change to upvote
-        success = vote.update(up: false)
+        success = vote.update(vote: "down")
       end
       if success
         render json: post, status: 200
@@ -63,7 +63,7 @@ class Api::PostsController < Api::ApiController
         render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
     else
-      vote = Vote.new(up: false, voteable_id: post.id, voteable_type: post.class.name, user_id: current_user.id)
+      vote = Vote.new(vote: "down", voteable_id: post.id, voteable_type: post.class.name, user_id: current_user.id)
       if vote.save
         render json: post, status: 200
       else

@@ -19,14 +19,7 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Vote < ApplicationRecord
-  belongs_to :voteable, polymorphic: true
-  belongs_to :user
-  validates_presence_of :vote
 
-  enum vote: {down: 0, up: 1}
-
-  def self.total_votes
-    up.count - down.count
-  end
+class VoteSerializer < ActiveModel::Serializer
+  attributes :vote
 end

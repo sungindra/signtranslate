@@ -3,7 +3,7 @@
 # Table name: votes
 #
 #  id            :bigint           not null, primary key
-#  up            :boolean
+#  vote          :integer
 #  voteable_type :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
