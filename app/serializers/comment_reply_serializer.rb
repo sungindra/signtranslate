@@ -26,4 +26,8 @@ class CommentReplySerializer < ActiveModel::Serializer
   def user_name
     object.user.name
   end
+
+  def created_at
+    object.created_at.strftime("%H:%M %d-%m-%Y")
+  end
 end

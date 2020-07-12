@@ -23,6 +23,61 @@ class Api::CommentsController < Api::ApiController
     end
   end
 
+
+  def upvote
+    sign = Sign.find(params[:id])
+    vote = sign.votes.find_by(user_id: current_user.id)
+    if vote
+      success = false
+      if vote.up?
+        #if upvoted, delete vote
+        success = vote.destroy
+      else
+        #if downvoted, change to upvote
+        success = vote.update(vote: "up")
+      end
+      if success
+        render json: sign, serializer: SignAsPostCommentSerializer, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    else
+      vote = Vote.new(vote: "up", voteable_id: sign.id, voteable_type: sign.class.name, user_id: current_user.id)
+      if vote.save
+        render json: sign, serializer: SignAsPostCommentSerializer, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def downvote
+    sign = Sign.find(params[:id])
+    vote = sign.votes.find_by(user_id: current_user.id)
+    if vote
+      success = false
+      unless vote.up?
+        #if upvoted, delete vote
+        success = vote.destroy
+      else
+        #if downvoted, change to upvote
+        success = vote.update(vote: "down")
+      end
+      if success
+        render json: sign, serializer: SignAsPostCommentSerializer, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    else
+      vote = Vote.new(vote: "down", voteable_id: sign.id, voteable_type: sign.class.name, user_id: current_user.id)
+      if vote.save
+        render json: sign, serializer: SignAsPostCommentSerializer, status: 200
+      else
+        render json: { errors: vote.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    end
+  end
+
   private
   def sign_params
     params.require(:sign).permit(:meaning,

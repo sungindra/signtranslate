@@ -21,14 +21,18 @@
 #
 
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :status, :total_votes
-  has_one :user_vote, serializer: VoteSerializer
+  attributes :id, :title, :user_name, :status, :total_votes, :current_user_vote
+  has_one :current_user_vote, serializer: VoteSerializer
+
+  def user_name
+    object.user.name
+  end
 
   def total_votes
     object.votes.total_votes
   end
 
-  def user_vote
+  def current_user_vote
     object.votes.where(user: scope.current_user).first
   end
 end

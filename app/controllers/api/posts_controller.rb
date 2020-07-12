@@ -6,7 +6,7 @@ class Api::PostsController < Api::ApiController
 
   def show
     post = Post.find(params[:id])
-    render json: post, serializer: PostDetailSerializer, status: 200
+    render json: post, serializer: PostDetailSerializer, include: "signs,signs.comment_replies", status: 200
   end
 
   def create
