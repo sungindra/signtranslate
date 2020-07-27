@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :posts do
     patch :approve, on: :member
   end
+  resources :users do
+    patch :ban, on: :member
+  end
 
   namespace :api, defaults: { format: :json } do
     resources :signs, only: %i[show index]
