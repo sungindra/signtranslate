@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create
-    if Category.update(category_params)
+    if Category.create(category_params)
       redirect_to categories_path, notice: 'Kategori berhasil dibuat'
     else
       render 'new'
