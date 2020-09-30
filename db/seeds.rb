@@ -8,8 +8,8 @@
 
 User.create(email: "admin@example.com", password: "password", name: "Admin")
 
-alphabet = Category.create(title: "Abjad", image: "/alphabet.png")
-number = Category.create(title: "Angka", image: "/number.png")
+alphabet = Category.create(title: "Abjad")
+number = Category.create(title: "Angka")
 
 ("a".."z").each do |x| 
   Sign.create(meaning: x, sign_type: "sibi", image: "sibi_"+x+".png", category: alphabet, user_id: 1)
@@ -18,5 +18,9 @@ end
   Sign.create(meaning: x, sign_type: "bisindo", image: "bisindo_"+x+".png", category: alphabet, user_id: 1)
 end
 
-10.times { |x| Sign.create!(meaning: (x+1).to_s, sign_type: "bisindo", image: "bisindo_"+(x+1).to_s+".png", category: number, user_id: 1) }
+#this is done to match data in server before addition of carrierwave
+Sign.create(category: alphabet, user_id: 1)
+Sign.last.destroy
+
 10.times { |x| Sign.create!(meaning: (x+1).to_s, sign_type: "sibi", image: "sibi_"+(x+1).to_s+".png", category: number, user_id: 1) }
+10.times { |x| Sign.create!(meaning: (x+1).to_s, sign_type: "bisindo", image: "bisindo_"+(x+1).to_s+".png", category: number, user_id: 1) }
