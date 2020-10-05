@@ -2,10 +2,18 @@
   .card-header
     = simple_form_for @sign, url: url do |f|
       .form-inputs
-        =f.input :meaning, label: 'Arti'
-        =f.input :image, label: 'Gambar Isyarat'
-        = image_tag "#{@sign.image.file.present? ? @sign.image.url : ''}", class: "#{@sign.image.file.present? ? '' : 'hidden'} image_to_upload img-thumbnail"
-        =f.input :sign_type, collection: [["SIBI", "sibi"], ["BISINDO", "bisindo"]], label:'Nama Kota', include_blank: "Pilih bahasa"
+        .row
+          .col-md-6
+            =f.input :meaning, label: 'Arti'
+          .col-md-6
+            =f.input :category_id, collection: Category.where.not(title: "Default"), label: "Kategori", include_blank: "Pilih Kategori"
+        .row
+          .col-md-12
+            =f.input :image, label: 'Gambar Isyarat'
+            = image_tag "#{@sign.image.file.present? ? @sign.image.url : ''}", class: "#{@sign.image.file.present? ? '' : 'hidden'} image_to_upload img-thumbnail"
+        .row
+          .col-md-12
+            =f.input :sign_type, collection: [["SIBI", "sibi"], ["BISINDO", "bisindo"]], label:'Bahasa', include_blank: "Pilih bahasa"
       .form-actions
         = f.button :submit, class: "btn btn-primary btn-block"
 

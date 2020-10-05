@@ -37,7 +37,11 @@ class SignsController < ApplicationController
 
   private
   def sign_params
-    params.require(:sign).permit(:meaning, :image, :sign_type, :description)
+    params.require(:sign).permit(:meaning,
+                                 :image,
+                                 :sign_type,
+                                 :description,
+                                 :category_id).merge(user: current_user)
   end
 
   def set_sign

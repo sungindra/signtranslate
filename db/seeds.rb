@@ -8,6 +8,7 @@
 
 User.create(email: "admin@example.com", password: "password", name: "Admin")
 
+Category.create(title: "Default")
 alphabet = Category.create(title: "Abjad")
 number = Category.create(title: "Angka")
 

@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :update, :destroy]
   def index
-    @q = Category.all.ransack(params[:q])
+    @q = Category.where.not(title: "Default").ransack(params[:q])
     @pagy, @categories = pagy(@q.result.order(created_at: :asc), items: 25)
   end
 
@@ -28,7 +28,12 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    # @category.destroy
+    default_category = Category.find_by(title: "Default")
+    @category.signs.each do |sign|
+      sign.update!(category: default_category)
+      byebug
+    end
+    Category.find(@category.id).destroy  #@category.signs is not updated, signs will destroyed as well
     redirect_to categories_path, notice: 'Kategori berhasil dihapus'
   end
 
