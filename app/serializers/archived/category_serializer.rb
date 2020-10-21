@@ -9,8 +9,8 @@
 #
 class CategorySerializer < ActiveModel::Serializer
   attributes :id, :title, :image
-  has_many :sibi, serializer: SignDetailSerializer
-  has_many :bisindo, serializer: SignDetailSerializer
+  # has_many :sibi, serializer: SignDetailSerializer
+  # has_many :bisindo, serializer: SignDetailSerializer
 
   def sibi
     object.signs.sibi

@@ -8,6 +8,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Season < ApplicationRecord
-  has_many :levels
+class SeasonSerializer < ActiveModel::Serializer
+  attributes :id, :title, :tag
 end

@@ -26,9 +26,9 @@ class User < ApplicationRecord
 
   enum role: {member: 1, admin: 10}
 
-  has_many :posts, dependent: :destroy
-  has_many :signs, dependent: :nullify
-  has_many :votes, dependent: :destroy
+  # has_many :posts, dependent: :destroy
+  # has_many :signs, dependent: :nullify
+  # has_many :votes, dependent: :destroy
 
   # def clear_push_notification!
   #   update(push_token: nil)

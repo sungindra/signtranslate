@@ -22,8 +22,8 @@
 
 class PostDetailSerializer < ActiveModel::Serializer
   attributes :id, :title, :user_name, :user_id, :content, :status, :total_votes, :current_user_vote
-  has_many :signs, serializer: SignAsPostCommentSerializer, include_nested_associations: true
-  has_one :current_user_vote, serializer: VoteSerializer
+  # has_many :signs, serializer: SignAsPostCommentSerializer, include_nested_associations: true
+  # has_one :current_user_vote, serializer: VoteSerializer
 
   def user_name
     object.user.name

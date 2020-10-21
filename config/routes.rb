@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :seasons
   resources :levels
 
-  root 'pages#index'
+  namespace :api, defaults: { format: :json } do
+    resources :seasons, only: %i[index show]
+    resources :levels, only: [:show]
+  end
+
+  # root 'pages#index'
   # resources :signs
   # resources :categories
   # resources :posts do

@@ -25,7 +25,7 @@
 
 class PostSerializer < ActiveModel::Serializer
   attributes :id, :title, :user_name, :status, :total_votes, :current_user_vote
-  has_one :current_user_vote, serializer: VoteSerializer
+  # has_one :current_user_vote, serializer: VoteSerializer
 
   def user_name
     object.user.name
