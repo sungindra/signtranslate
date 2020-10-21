@@ -1,40 +1,49 @@
 .header-navbar.navbar.navbar-horizontal.navbar-fixed.navbar-light.navbar-without-dd-arrow.navbar-shadow.menu-border data-menu="menu-wrapper" role="navigation"
   .navbar-container.main-menu-content data-menu="menu-container"
+    ul#parter-menu-navigation.nav.navbar-nav data-menu="menu-navigation"
+      li.nav-item
+        = link_to seasons_path, class: 'nav-link' do
+          i.fa.fa-folder-o
+          span Season
+      li.nav-item
+        = link_to levels_path, class: 'nav-link' do
+          i.fa.fa-file-o
+          span Level
     / ul#main-menu-navigation.nav.navbar-nav data-menu="menu-navigation"
     /   li.nav-item
     /     = link_to root_path, class: 'nav-link' do
     /       i.fa.fa-home
     /       span Dashboard
-    ul#parter-menu-navigation.nav.navbar-nav data-menu="menu-navigation"
-      li.nav-item
-        = link_to signs_path, class: 'nav-link' do
-          i.fa.fa-hand-paper-o
-          span Entri Kamus
-      li.nav-item
-        = link_to categories_path, class: 'nav-link' do
-          i.fa.fa-folder-o
-          span Kategori Kata
-      li.dropdown.nav-item data-menu="dropdown"
-        a.dropdown-toggle.nav-link href="#" data-toggle="dropdown"
-          i.fa.fa-comments-o
-          span Forum&nbsp;
-          - if @unapproved_forum > 0 then
-            span.tag.tag-danger.round
-              = @unapproved_forum
-        ul.dropdown-menu
-            li
-              = link_to posts_path( status: "unapproved" ), class: 'dropdown-item', 'data-toggle' => 'dropdown' do
-                span Belum Periksa&nbsp;
-                - if @unapproved_forum > 0 then
-                  span.tag.tag-danger.round
-                    = @unapproved_forum
-            li
-              = link_to posts_path( status: "approved" ), class: 'dropdown-item', 'data-toggle' => 'dropdown' do
-                span Telah Diterima
-            li
-              = link_to posts_path, class: 'dropdown-item', 'data-toggle' => 'dropdown' do
-                span Semua
-      li.nav-item
-        = link_to users_path, class: 'nav-link' do
-          i.fa.fa-user-o
-          span Pengguna
+    / ul#parter-menu-navigation.nav.navbar-nav data-menu="menu-navigation"
+    /   li.nav-item
+    /     = link_to signs_path, class: 'nav-link' do
+    /       i.fa.fa-hand-paper-o
+    /       span Entri Kamus
+    /   li.nav-item
+    /     = link_to categories_path, class: 'nav-link' do
+    /       i.fa.fa-folder-o
+    /       span Kategori Kata
+    /   li.dropdown.nav-item data-menu="dropdown"
+    /     a.dropdown-toggle.nav-link href="#" data-toggle="dropdown"
+    /       i.fa.fa-comments-o
+    /       span Forum&nbsp;
+    /       - if @unapproved_forum > 0 then
+    /         span.tag.tag-danger.round
+    /           = @unapproved_forum
+    /     ul.dropdown-menu
+    /         li
+    /           = link_to posts_path( status: "unapproved" ), class: 'dropdown-item', 'data-toggle' => 'dropdown' do
+    /             span Belum Periksa&nbsp;
+    /             - if @unapproved_forum > 0 then
+    /               span.tag.tag-danger.round
+    /                 = @unapproved_forum
+    /         li
+    /           = link_to posts_path( status: "approved" ), class: 'dropdown-item', 'data-toggle' => 'dropdown' do
+    /             span Telah Diterima
+    /         li
+    /           = link_to posts_path, class: 'dropdown-item', 'data-toggle' => 'dropdown' do
+    /             span Semua
+    /   li.nav-item
+    /     = link_to users_path, class: 'nav-link' do
+    /       i.fa.fa-user-o
+    /       span Pengguna

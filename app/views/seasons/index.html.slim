@@ -1,0 +1,43 @@
+.content-body
+  /! Zero configuration table
+  section#configuration
+    .row
+      .col-md-12
+        .card
+          .card-header
+            h4.card-title Season
+            .heading-elements
+              .pull-center
+                = link_to "Add New Season".html_safe, new_season_path, class: "btn btn-primary"
+          .row
+            .card-block.card-dashboard
+              = search_form_for @q do |f|
+                .col-sm-11
+                  .input-group
+                    span.input-group-addon
+                      i.fa.fa-search.bg-secondary aria-hidden="true"
+                    = f.text_field :title_cont, :placeholder => "Search by season title", class: "form-control"
+                .col-sm-1
+                  = f.submit "Search", class: "btn btn-primary"
+          .card-body.collapse.in
+            .card-block.card-dashboard
+              .table-responsive
+                table.table.table-striped.table-bordered
+                  thead
+                    tr
+                      th.center width="20%" = sort_link(@q, :title, "Title")
+                      th.center width="15%" = sort_link(@q, :created_at, "Created At")
+                      th.center width="10%" Actions
+                  tbody
+                    - @seasons.each do |season|
+                      tr
+                        td = season.title
+                        td = season.created_at.strftime("%d/%m/%Y")
+                        td
+                          .btn-group role="group"
+                            = link_to edit_season_path(season), class: "btn btn-success" do
+                              i.fa.fa-cog
+                            = link_to season_path(season), method: :delete, data: {confirm: "Are you sure to delete this season?"}, class: "btn btn-danger" do
+                              i.fa.fa-trash-o
+
+              = pagy_bootstrap_nav(@pagy).html_safe

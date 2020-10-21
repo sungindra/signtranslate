@@ -1,0 +1,7 @@
+.card
+  .card-header
+    = simple_form_for @season, url: url do |f|
+      .form-inputs
+        = f.input :title
+        = f.input :tag
+        = f.button :submit, class: "btn btn-primary btn-block"

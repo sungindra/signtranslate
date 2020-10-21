@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_123145) do
+ActiveRecord::Schema.define(version: 2020_10_20_063758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 2020_07_27_123145) do
     t.index ["user_id"], name: "index_comment_replies_on_user_id"
   end
 
+  create_table "levels", force: :cascade do |t|
+    t.integer "level"
+    t.string "video"
+    t.string "answer"
+    t.string "hint"
+    t.bigint "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_levels_on_season_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "content"
@@ -42,6 +53,13 @@ ActiveRecord::Schema.define(version: 2020_07_27_123145) do
     t.bigint "category_id"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.string "title"
+    t.string "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "signs", force: :cascade do |t|
@@ -87,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_07_27_123145) do
 
   add_foreign_key "comment_replies", "signs"
   add_foreign_key "comment_replies", "users"
+  add_foreign_key "levels", "seasons"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "signs", "categories"

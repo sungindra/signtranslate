@@ -1,0 +1,20 @@
+.card
+  .card-header
+    = simple_form_for @level, url: url do |f|
+      .form-inputs
+        .row
+          .col-md-6
+            = f.input :season_id, collection: Season.all, include_blank: "Choose season"
+          .col-md-6
+            = f.input :level
+        .row
+          .col-md-12
+            = f.input :answer
+        .row
+          .col-md-12
+            = f.input :hint
+        .row
+          .col-md-12
+            = f.input :video
+      .form-actions
+        = f.button :submit, class: "btn btn-primary btn-block"
