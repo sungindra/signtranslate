@@ -18,7 +18,15 @@
 #  fk_rails_...  (season_id => seasons.id)
 #
 class DictionarySerializer < ActiveModel::Serializer
-  attributes :id, :category_id, :category, :meaning, :image
+  attributes :id, :category_id, :category_name, :meaning, :image
+
+  def category_id
+    object.season.id
+  end
+
+  def category_name
+    object.season.title
+  end
 
   def image
     object.image.url
