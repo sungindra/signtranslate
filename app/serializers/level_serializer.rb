@@ -20,7 +20,7 @@
 #  fk_rails_...  (season_id => seasons.id)
 #
 class LevelSerializer < ActiveModel::Serializer
-  attributes :id, :level, :level_string, :answer, :hint, :video
+  attributes :id, :level_string, :answer, :hint, :video
 
   def level_string
     "Level #{object.season.tag}-#{object.level.to_s}"

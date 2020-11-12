@@ -1,6 +1,7 @@
 class Api::SeasonsController < Api::ApiController
   skip_before_action :authenticate_user
   skip_before_action :authenticate_with_token!
+  before_action :set_season, only: %i[show dictionaries]
 
   def index
     seasons = Season.all
@@ -8,7 +9,17 @@ class Api::SeasonsController < Api::ApiController
   end
 
   def show
-    levels = Season.find(params[:id]).levels
+    levels = @season.levels.order(level: :asc)
     render json: levels, each_serializer: SimpleLevelSerializer, status: 200
+  end
+
+  def dictionaries
+    dictionaries = @season.dictionaries
+    render json: dictionaries
+  end
+
+  private
+  def set_season
+    @season = Season.find(params[:id])
   end
 end

@@ -9,5 +9,5 @@
 #  updated_at :datetime         not null
 #
 class SeasonSerializer < ActiveModel::Serializer
-  attributes :id, :title, :tag
+  attributes :id, :title
 end

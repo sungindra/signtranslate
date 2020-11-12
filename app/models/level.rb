@@ -23,4 +23,7 @@ class Level < ApplicationRecord
   belongs_to :season
 
   mount_uploader :video, VideoUploader
+
+  validates_presence_of :answer, :video, :season_id, :level
+  validates_uniqueness_of :level, scope: [:season_id]
 end

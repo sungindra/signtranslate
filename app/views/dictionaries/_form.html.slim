@@ -1,0 +1,15 @@
+.card
+  .card-header
+    = simple_form_for @dictionary, url: url do |f|
+      = f.error_notification
+      .form-inputs
+        .row
+          .col-md-6
+            = f.input :season_id, collection: Season.all, include_blank: "Choose Category", label: "Category"
+          .col-md-6
+            = f.input :meaning
+        .row
+          .col-md-12
+            = f.input :image
+      .form-actions
+        = f.button :submit, class: "btn btn-primary btn-block"
