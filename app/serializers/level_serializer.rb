@@ -23,7 +23,7 @@ class LevelSerializer < ActiveModel::Serializer
   attributes :id, :level, :level_string, :answer, :hint, :video
 
   def level_string
-    "Level #{object.season.tag}-#{object.level.to_s}"
+    "Level #{object.season.tag} - #{object.level.to_s}"
   end
 
   def video

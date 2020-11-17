@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :seasons, only: %i[index show] do
       get :dictionaries, on: :member
+      get :levels, on: :member
     end
     resources :levels, only: [:show]
   end
