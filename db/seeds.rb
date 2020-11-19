@@ -6,22 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: "admin@example.com", password: "password", name: "Admin")
+# User.create(email: "admin@example.com", password: "password", name: "Admin")
 
-Category.create(title: "Default")
-alphabet = Category.create(title: "Abjad")
-number = Category.create(title: "Angka")
+season = Season.first
 
 ("a".."z").each do |x| 
-  Sign.create(meaning: x, sign_type: "sibi", image: "sibi_"+x+".png", category: alphabet, user_id: 1)
-end
-("a".."z").each do |x| 
-  Sign.create(meaning: x, sign_type: "bisindo", image: "bisindo_"+x+".png", category: alphabet, user_id: 1)
+  Dictionary.create(meaning: x, image: "sibi_"+x+".png", season: season)
 end
 
-#this is done to match data in server before addition of carrierwave
-Sign.create(category: alphabet, user_id: 1)
-Sign.last.destroy
-
-10.times { |x| Sign.create!(meaning: (x+1).to_s, sign_type: "sibi", image: "sibi_"+(x+1).to_s+".png", category: number, user_id: 1) }
-10.times { |x| Sign.create!(meaning: (x+1).to_s, sign_type: "bisindo", image: "bisindo_"+(x+1).to_s+".png", category: number, user_id: 1) }
+10.times { |x| Dictionary.create!(meaning: (x+1).to_s, image: "sibi_"+(x+1).to_s+".png", season: season) }

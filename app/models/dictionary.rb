@@ -19,7 +19,7 @@
 #
 class Dictionary < ApplicationRecord
   belongs_to :season
-  mount_uploader :image, ImageUploader
+  # mount_uploader :image, ImageUploader
 
   validates_presence_of :image, :meaning, :season_id
 end
