@@ -4,7 +4,7 @@ class Api::SeasonsController < Api::ApiController
   before_action :set_season, only: %i[show levels dictionaries]
 
   def index
-    seasons = Season.all.order(tag: :asc)
+    seasons = Season.all
     render json: seasons, status: 200
   end
 
