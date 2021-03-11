@@ -27,6 +27,6 @@ class LevelSerializer < ActiveModel::Serializer
   end
 
   def video
-    object.video.url
+    object.video
   end
 end

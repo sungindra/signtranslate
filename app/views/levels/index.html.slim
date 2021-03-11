@@ -39,7 +39,7 @@
                         td = level.level
                         td = level.answer.truncate(50)
                         td = level.hint.truncate(50)
-                        td = link_to(level.video.url, level.video.url)
+                        td = link_to(level.video, level.video)
                         td = level.created_at.strftime("%d/%m/%Y")
                         td
                           .btn-group role="group"
